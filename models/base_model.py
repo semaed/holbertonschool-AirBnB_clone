@@ -8,8 +8,6 @@ other classes.
 import uuid
 # We import the datetime module to manage dates and times
 from datetime import datetime
-# Import the storage object from models
-from models import storage
 
 
 class BaseModel:
@@ -23,30 +21,28 @@ class BaseModel:
         If kwargs is not empty, assigns attributes based on kwargs.
         Otherwise, assigns unique id and the current date/time.
         """
-        # Generate a unique ID for the instance
-        self.id = str(uuid.uuid4())
-        # Get the current date and time for created_at
-        self.created_at = datetime.now()
-        # updated_at is the same as created_at when the instance is created
-        self.updated_at = self.created_at
-        if kwargs:
-            # If kwargs (a dictionary) is provided,
-            # use it to set up the instance attributes
+
+        if kwargs:  # Instance is created from dictionary
+            # Iterate through dictionary items
             for key, value in kwargs.items():
-                # Loop through each key-value pair.
-                # If key is 'created_at' or 'updated_at', convert value
-                # from a string to a datetime object
+                # Convert string to datetime for these keys
                 if key == 'created_at' or key == 'updated_at':
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                # '__class__' should not be an attribute, so we skip it
+                # Ignore the __class__ key
                 if key != '__class__':
                     # Set attribute on instance with key-value pair.
                     setattr(self, key, value)
 
         else:
-            # If kwargs is not provided, it's a new instance, so we add it to
-            # storage
-            storage.new(self)
+            # Generate a unique ID for the instance
+            self.id = str(uuid.uuid4())
+            # Get the current date and time for created_at
+            self.created_at = datetime.now()
+            # updated_at is the same as created_at when the instance is created
+            self.updated_at = self.created_at
+        # Import storage and add the new object to it
+        from models import storage
+        storage.new(self)
 
     def __str__(self):
         """
@@ -61,8 +57,9 @@ class BaseModel:
         This method updates the 'updated_at' attribute with the current date
         and time.
         """
-        # Update the 'updated_at' attribute with the current date and time
+        # Update the updated_at attribute
         self.updated_at = datetime.now()
+        from models import storage  # Import the storage object
         # Save the instance to storage
         storage.save()
 
