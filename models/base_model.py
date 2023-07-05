@@ -21,40 +21,35 @@ class BaseModel:
         If kwargs is not empty, assigns attributes based on kwargs.
         Otherwise, assigns unique id and the current date/time.
         """
-        if kwargs:
-            # kwargs provided? We're recreating an instance from a dictionary.
+
+        if kwargs:  # Instance is created from dictionary
+            # Iterate through dictionary items
             for key, value in kwargs.items():
-                # Loop through each key-value pair.
+                # Convert string to datetime for these keys
                 if key == 'created_at' or key == 'updated_at':
-                    # If key is 'created_at'/'updated_at', convert string
-                    # to datetime.
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                # Ignore the __class__ key
                 if key != '__class__':
-                    # Skip '__class__' key, not needed for attribute.
-                    setattr(self, key, value)
                     # Set attribute on instance with key-value pair.
+                    setattr(self, key, value)
+
         else:
-
-            # Create a unique ID for each instance
+            # Generate a unique ID for the instance
             self.id = str(uuid.uuid4())
-            # Get the current date and time.
-            now = datetime.now()
-
-            # Set the 'created_at' attribute to the current date and time.
-            # This marks when this instance was created.
-            self.created_at = now
-
-            # Get the current date and time for created_at and updated_at
-            # Set the 'updated_at' attribute to the current date and time.
-            # At creation, 'created_at' and 'updated_at' are the same.
-            # Later, 'updated_at' will change whenever the instance is updated.
-            self.updated_at = now
+            # Get the current date and time for created_at
+            self.created_at = datetime.now()
+            # updated_at is the same as created_at when the instance is created
+            self.updated_at = self.created_at
+        # Import storage and add the new object to it
+        from models import storage
+        storage.new(self)
 
     def __str__(self):
         """
         This method returns a string representation of the instance.
         """
-        # Format and return the string using f-string
+        # Return a formatted string containing the class name, the ID,
+        # and the dictionary of the instance attributes.
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
@@ -62,8 +57,11 @@ class BaseModel:
         This method updates the 'updated_at' attribute with the current date
         and time.
         """
-        # Update the 'updated_at' attribute with the current date and time
+        # Update the updated_at attribute
         self.updated_at = datetime.now()
+        from models import storage  # Import the storage object
+        # Save the instance to storage
+        storage.save()
 
     def to_dict(self):
         """
