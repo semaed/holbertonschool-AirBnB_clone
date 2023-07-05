@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+""" Module for the entry point of the
+command inerpreter"""
 # Import cmd for command line interpreters.
 import cmd
 
