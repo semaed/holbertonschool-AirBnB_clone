@@ -5,6 +5,7 @@ command inerpreter"""
 import cmd
 import shlex
 import models
+import sys
 from models import storage
 from models.base_model import BaseModel
 
@@ -27,14 +28,18 @@ class HBNBCommand(cmd.Cmd):
     # Command 'quit' to exit the program.
     def do_quit(self, args):
         """Exits the program."""
+        # checks if running in non-interactive mode
+        if not sys.stdin.isatty():
+            # Prints a newline character.
+            print()
         # If the 'quit' command is executed, the command loop ends.
         return True
 
     # Command 'EOF' to exit the program.
     def do_EOF(self, args):
         """Also exits the program."""
-        # If the 'EOF' command is executed, the command loop ends.
-        return True
+        # exits the cmd loop the same way 'quit' does
+        return self.do_quit(args)
 
     # If line is empty, do nothing.
     def emptyline(self):
