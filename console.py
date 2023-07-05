@@ -28,13 +28,13 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, args):
         """Exits the program."""
         # If the 'quit' command is executed, the command loop ends.
-        raise SystemExit
+        return True
 
     # Command 'EOF' to exit the program.
     def do_EOF(self, args):
         """Also exits the program."""
         # If the 'EOF' command is executed, the command loop ends.
-        raise SystemExit
+        return True
 
     # If line is empty, do nothing.
     def emptyline(self):
