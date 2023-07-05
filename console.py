@@ -27,7 +27,7 @@ class HBNBCommand(cmd.Cmd):
 
     # Command 'quit' to exit the program.
     def do_quit(self, args):
-        """Exits the program."""
+        """Quit command to exit the program"""
         # checks if running in non-interactive mode
         if not sys.stdin.isatty():
             # Prints a newline character.
@@ -37,7 +37,7 @@ class HBNBCommand(cmd.Cmd):
 
     # Command 'EOF' to exit the program.
     def do_EOF(self, args):
-        """Also exits the program."""
+        """EOF command to exit the program"""
         # exits the cmd loop the same way 'quit' does
         return self.do_quit(args)
 
