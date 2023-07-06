@@ -26,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
         self.classes = {"BaseModel": BaseModel}
 
     # Command 'quit' to exit the program.
-    def do_quit(self, args):
+    def do_quit(self, line):
         """Quit command to exit the program"""
         # checks if running in non-interactive mode
         if not sys.stdin.isatty():
@@ -36,10 +36,10 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     # Command 'EOF' to exit the program.
-    def do_EOF(self, args):
+    def do_EOF(self, line):
         """EOF command to exit the program"""
         # exits the cmd loop the same way 'quit' does
-        return self.do_quit(args)
+        return self.do_quit(line)
 
     # If line is empty, do nothing.
     def emptyline(self):
@@ -57,7 +57,11 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
-
+        class_name  = args[0]
+        if class_name in storage.classes:
+            print("class doesn't exist **")
+            return
+        
         # If class name exists in the list of classes we can create
         if args[0] in self.classes:
 
