@@ -8,6 +8,7 @@ This module starts the command interpreter using cmd module.
 import cmd
 from models.base_model import BaseModel  # Import the BaseModel class
 from models import storage  # Import the storage object
+from models.user import User  # Import the User class
 
 
 class HBNBCommand(cmd.Cmd):
@@ -18,6 +19,9 @@ class HBNBCommand(cmd.Cmd):
 
     # The prompt attribute of cmd.Cmd sets the prompt
     prompt = '(hbnb) '
+
+    # Create a dictionary to map class names to classes
+    classes = {"BaseModel": BaseModel, "User": User}
 
     # Below are the methods that implement the functionality of the commands.
 
@@ -34,10 +38,11 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()  # Split the arguments
         if len(args) < 1:  # Check if class name is missing
             print("** class name missing **")
-        elif args[0] != "BaseModel":  # Check if class doesn't exist
+        elif args[0] not in self.classes:  # Check if class doesn't exist
             print("** class doesn't exist **")
         else:
-            new_instance = BaseModel()  # Create new instance
+            # Create new instance # Create new instance
+            new_instance = self.classes[args[0]]()
             new_instance.save()  # Save it
             print(new_instance.id)  # Print the id
 
@@ -46,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()  # Split the arguments
         if len(args) == 0:  # Check if class name is missing
             print("** class name missing **")
-        elif args[0] != "BaseModel":  # Check if class doesn't exist
+        elif args[0] not in self.classes:  # Check if class doesn't exist
             print("** class doesn't exist **")
         elif len(args) == 1:  # Check if id is missing
             print("** instance id missing **")
