@@ -49,21 +49,29 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel"""
-        # If no argument is provided, print an error message.
-        if not arg:
+
+        # Split the 'arg' into a list by spaces
+        args = shlex.split(arg)
+
+        # Check if any arguments were passed, if not, print error and exit
+        if len(args) == 0:
             print("** class name missing **")
             return
-        # If the class name doesn't exist, print an error message.
-        elif arg not in classes:
-            print("** class doesn't exist **")
-            return
-        else:
-            # Create a new instance of the class.
-            new_instance = classes[arg]()
-            # Save the new instance.
+
+        # If class name exists in the list of classes we can create
+        if args[0] in self.classes:
+
+            # Create a new instance of the specified class
+            new_instance = self.classes[args[0]]()
+
+            # Save the new instance to a file
             new_instance.save()
-            # Print the id of the new instance.
+
+            # Print the id of the new instance
             print(new_instance.id)
+        # If class name doesn't exist, print an error message
+        else:
+            print("** class doesn't exist **")
 
     def do_show(self, arg):
         """Prints string representation of instance"""
@@ -71,15 +79,12 @@ class HBNBCommand(cmd.Cmd):
         # Check if class name is provided.
         if len(args) == 0:
             print("** class name missing **")
-            return
         # Check if class name exists.
         elif args[0] not in classes:
             print("** class doesn't exist **")
-            return
         # Check if id is provided.
         elif len(args) == 1:
             print("** instance id missing **")
-            return
         else:
             # Create the key with class name and id.
             key = args[0] + "." + args[1]
@@ -87,7 +92,6 @@ class HBNBCommand(cmd.Cmd):
             if key in storage.all():
                 # If instance exists, print it.
                 print(storage.all()[key])
-                return
             else:
                 # If instance does not exist, print error message.
                 print("** no instance found **")
@@ -98,15 +102,12 @@ class HBNBCommand(cmd.Cmd):
         # Check if class name is provided.
         if len(args) == 0:
             print("** class name missing **")
-            return
         # Check if class name exists.
         elif args[0] not in classes:
             print("** class doesn't exist **")
-            return
         # Check if id is provided.
         elif len(args) == 1:
             print("** instance id missing **")
-            return
         else:
             # Create the key with class name and id.
             key = args[0] + "." + args[1]
@@ -125,11 +126,9 @@ class HBNBCommand(cmd.Cmd):
         if arg not in classes and arg != "":
             # If class name doesn't exist, print an error.
             print("** class doesn't exist **")
-            return
         else:
             # Print all instances of the class.
             print([str(v) for k, v in storage.all().items()])
-            return
 
     def do_update(self, arg):
         """Updates an instance."""
