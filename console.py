@@ -39,7 +39,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             new_instance = BaseModel()  # Create new instance
             new_instance.save()  # Save it
-            print(new_instance.id)  # Print the id
 
     def do_show(self, arg):
         """Prints the string representation of an instance."""
