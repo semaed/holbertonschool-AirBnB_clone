@@ -129,33 +129,45 @@ class HBNBCommand(cmd.Cmd):
         # Check for missing arguments
         if len(args) == 0:
             print("** class name missing **")
+            return
         # Check if the class name does not exist.
         elif args[0] not in self.classes:
             print("** class doesn't exist **")
+            return
         # Check if id is missing.
         elif len(args) == 1:
             print("** instance id missing **")
-        else:
-            # Create key for objects dict
-            key = args[0] + '.' + args[1]
+            return
 
-            # Check if key doesn't exist in storage
-            if key not in models.storage.all():
-                print("** no instance found **")
-            # Check if attribute name is missing.
-            elif len(args) == 2:
-                print("** attribute name missing **")
-            # Check if value for attribute name is missing.
-            elif len(args) == 3:
-                print("** value missing **")
-            else:
-                obj = models.storage.all()[key]
-                try:
-                    attr_type = type(getattr(obj, args[2]))
-                except AttributeError:
-                    attr_type = str
-                setattr(obj, args[2], attr_type(args[3]))
-                obj.save()
+        # Create the key with class name and id.
+        key = args[0] + "." + args[1]
+
+        # Check if instance exists.
+        if key not in storage.all():
+            print("** no instance found **")
+            return
+
+        # Check if attribute name is provided.
+        elif len(args) == 2:
+            print("** attribute name missing **")
+            return
+
+        # Check if value for attribute name is missing.
+        elif len(args) == 3:
+            print("** value missing **")
+            return
+
+        else:
+            # Get the instance from storage.
+            instance = storage.all()[key]
+            # Update the attribute with the provided value.
+            obj = models.storage.all()[key]
+            try:
+                attr_type = type(getattr(instance, args[2]))
+            except AttributeError:
+                pass
+            setattr(instance, args[2], args[3])
+            instance.save()
 
 
 # Run command loop if file is run directly.
