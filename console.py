@@ -57,26 +57,21 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
+        
         class_name  = args[0]
         if class_name in storage.classes:
             print("class doesn't exist **")
             return
         
-        # If class name exists in the list of classes we can create
-        if args[0] in self.classes:
-
             # Create a new instance of the specified class
-            new_instance = self.classes[args[0]]()
+            new_instance = storage.classes[class_name]()
 
             # Save the new instance to a file
             new_instance.save()
 
             # Print the id of the new instance
             print(new_instance.id)
-        # If class name doesn't exist, print an error message
-        else:
-            print("** class doesn't exist **")
-
+            
     def do_show(self, arg):
         """Prints string representation of instance"""
         args = arg.split()
