@@ -63,15 +63,15 @@ class HBNBCommand(cmd.Cmd):
             print("class doesn't exist **")
             return
         
-            # Create a new instance of the specified class
-            new_instance = storage.classes[class_name]()
+        # Create a new instance of the specified class
+        new_instance = storage.classes[class_name]()
 
-            # Save the new instance to a file
-            new_instance.save()
+        # Save the new instance to a file
+        new_instance.save()
 
-            # Print the id of the new instance
-            print(new_instance.id)
-            
+        # Print the id of the new instance
+        print(new_instance.id)
+
     def do_show(self, arg):
         """Prints string representation of instance"""
         args = arg.split()
