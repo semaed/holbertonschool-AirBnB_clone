@@ -21,6 +21,12 @@ class BaseModel:
         If kwargs is not empty, assigns attributes based on kwargs.
         Otherwise, assigns unique id and the current date/time.
         """
+        # Generate a unique ID for the instance
+        self.id = str(uuid.uuid4())
+        # Get the current date and time for created_at
+        self.created_at = datetime.now()
+        # updated_at is the same as created_at when the instance is created
+        self.updated_at = self.created_at
 
         if kwargs:  # Instance is created from dictionary
             # Iterate through dictionary items
@@ -34,15 +40,9 @@ class BaseModel:
                     setattr(self, key, value)
 
         else:
-            # Generate a unique ID for the instance
-            self.id = str(uuid.uuid4())
-            # Get the current date and time for created_at
-            self.created_at = datetime.now()
-            # updated_at is the same as created_at when the instance is created
-            self.updated_at = self.created_at
-        # Import storage and add the new object to it
-        from models import storage
-        storage.new(self)
+            # Import storage and add the new object to it
+            from models import storage
+            storage.new(self)
 
     def __str__(self):
         """
