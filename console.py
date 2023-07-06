@@ -52,9 +52,11 @@ class HBNBCommand(cmd.Cmd):
         # If no argument is provided, print an error message.
         if not arg:
             print("** class name missing **")
+            return
         # If the class name doesn't exist, print an error message.
         elif arg not in classes:
             print("** class doesn't exist **")
+            return
         else:
             # Create a new instance of the class.
             new_instance = classes[arg]()
@@ -69,12 +71,15 @@ class HBNBCommand(cmd.Cmd):
         # Check if class name is provided.
         if len(args) == 0:
             print("** class name missing **")
+            return
         # Check if class name exists.
         elif args[0] not in classes:
             print("** class doesn't exist **")
+            return
         # Check if id is provided.
         elif len(args) == 1:
             print("** instance id missing **")
+            return
         else:
             # Create the key with class name and id.
             key = args[0] + "." + args[1]
@@ -82,6 +87,7 @@ class HBNBCommand(cmd.Cmd):
             if key in storage.all():
                 # If instance exists, print it.
                 print(storage.all()[key])
+                return
             else:
                 # If instance does not exist, print error message.
                 print("** no instance found **")
@@ -92,12 +98,15 @@ class HBNBCommand(cmd.Cmd):
         # Check if class name is provided.
         if len(args) == 0:
             print("** class name missing **")
+            return
         # Check if class name exists.
         elif args[0] not in classes:
             print("** class doesn't exist **")
+            return
         # Check if id is provided.
         elif len(args) == 1:
             print("** instance id missing **")
+            return
         else:
             # Create the key with class name and id.
             key = args[0] + "." + args[1]
@@ -116,9 +125,11 @@ class HBNBCommand(cmd.Cmd):
         if arg not in classes and arg != "":
             # If class name doesn't exist, print an error.
             print("** class doesn't exist **")
+            return
         else:
             # Print all instances of the class.
             print([str(v) for k, v in storage.all().items()])
+            return
 
     def do_update(self, arg):
         """Updates an instance."""
