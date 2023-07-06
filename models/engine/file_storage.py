@@ -5,6 +5,7 @@ deserializes instances to and from a JSON file."""
 import json  # We need json to convert dictionary to JSON string and vice versa
 import os    # import os module used for file path operations
 from models.base_model import BaseModel  # We need to use the BaseModel class
+from models.user import User  # Import the User class
 
 
 class FileStorage:
@@ -47,4 +48,7 @@ class FileStorage:
             from models.base_model import BaseModel
             # Convert dict to objects and add them to __objects
             for k, v in obj_dict.items():
-                self.__objects[k] = BaseModel(**v)
+                if v['__class__'] == 'BaseModel':
+                    self.__objects[k] = BaseModel(**v)
+                elif v['__class__'] == 'User':
+                    self.__objects[k] = User(**v)
