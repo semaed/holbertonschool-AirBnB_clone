@@ -1,186 +1,114 @@
-#!/usr/bin/env python3
-""" Module for the entry point of the
-command inerpreter"""
-# Import cmd for command line interpreters.
+#!/usr/bin/python3
+"""This is the console module.
+
+This module starts the command interpreter using cmd module.
+"""
+# Import the cmd module which provides a framework
+# for a command-line interpreter
 import cmd
-import shlex
-import models
-import sys
-from models import storage
-from models.base_model import BaseModel
+from models.base_model import BaseModel  # Import the BaseModel class
+from models import storage  # Import the storage object
 
 
-# Create a dictionary of available classes.
-classes = {"BaseModel": BaseModel}
-
-
-# Class for our command interpreter.
 class HBNBCommand(cmd.Cmd):
+    """This class is the command interpreter.
 
-    # Set the prompt for the console.
+    It inherits from cmd.Cmd which means it can make use of the cmd module.
+    """
+
+    # The prompt attribute of cmd.Cmd sets the prompt
     prompt = '(hbnb) '
 
-    # Define available classes.
-    def __init__(self):
-        super(HBNBCommand, self).__init__()
-        self.classes = {"BaseModel": BaseModel}
+    # Below are the methods that implement the functionality of the commands.
 
-    # Command 'quit' to exit the program.
-    def do_quit(self, args):
+    def do_quit(self, arg):
         """Quit command to exit the program"""
-        # checks if running in non-interactive mode
-        if not sys.stdin.isatty():
-            # Prints a newline character.
-            print()
-        # If the 'quit' command is executed, the command loop ends.
+        return True  # A True return value causes the cmdloop() to exit.
+
+    def do_EOF(self, arg):
+        """EOF command to exit the program"""
         return True
 
-    # Command 'EOF' to exit the program.
-    def do_EOF(self, args):
-        """EOF command to exit the program"""
-        # exits the cmd loop the same way 'quit' does
-        return self.do_quit(args)
-
-    # If line is empty, do nothing.
-    def emptyline(self):
-        """Do nothing if line is empty."""
-        # If an empty line is entered, do nothing.
-        pass
-
     def do_create(self, arg):
-        """Creates a new instance of BaseModel"""
-
-        # Split the 'arg' into a list by spaces
-        args = shlex.split(arg)
-
-        # Check if any arguments were passed, if not, print error and exit
-        if len(args) == 0:
+        """Creates a new instance of BaseModel, saves it, and prints the id."""
+        args = arg.split()  # Split the arguments
+        if len(args) < 1:  # Check if class name is missing
             print("** class name missing **")
-            return
-
-        # If class name exists in the list of classes we can create
-        if args[0] in self.classes:
-
-            # Create a new instance of the specified class
-            new_instance = self.classes[args[0]]()
-
-            # Save the new instance to a file
-            new_instance.save()
-
-            # Print the id of the new instance
-            print(new_instance.id)
-        # If class name doesn't exist, print an error message
-        else:
+        elif args[0] != "BaseModel":  # Check if class doesn't exist
             print("** class doesn't exist **")
+        else:
+            new_instance = BaseModel()  # Create new instance
+            new_instance.save()  # Save it
+            print(new_instance.id)  # Print the id
 
     def do_show(self, arg):
-        """Prints string representation of instance"""
-        args = arg.split()
-        # Check if class name is provided.
-        if len(args) == 0:
+        """Prints the string representation of an instance."""
+        args = arg.split()  # Split the arguments
+        if len(args) == 0:  # Check if class name is missing
             print("** class name missing **")
-        # Check if class name exists.
-        elif args[0] not in classes:
+        elif args[0] != "BaseModel":  # Check if class doesn't exist
             print("** class doesn't exist **")
-        # Check if id is provided.
-        elif len(args) == 1:
+        elif len(args) == 1:  # Check if id is missing
             print("** instance id missing **")
         else:
-            # Create the key with class name and id.
-            key = args[0] + "." + args[1]
-            # Check if instance exists.
-            if key in storage.all():
-                # If instance exists, print it.
-                print(storage.all()[key])
-            else:
-                # If instance does not exist, print error message.
+            key = args[0] + "." + args[1]  # Create key as <class name>.<id>
+            if key not in storage.all():  # Check if instance doesn't exist
                 print("** no instance found **")
+            else:
+                print(storage.all()[key])  # Print the instance
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id"""
-        args = arg.split()
-        # Check if class name is provided.
-        if len(args) == 0:
+        """Deletes an instance based on the class name and id."""
+        args = arg.split()  # Split the arguments
+        if len(args) == 0:  # Check if class name is missing
             print("** class name missing **")
-        # Check if class name exists.
-        elif args[0] not in classes:
+        elif args[0] != "BaseModel":  # Check if class doesn't exist
             print("** class doesn't exist **")
-        # Check if id is provided.
-        elif len(args) == 1:
+        elif len(args) == 1:  # Check if id is missing
             print("** instance id missing **")
         else:
-            # Create the key with class name and id.
-            key = args[0] + "." + args[1]
-            # Check if instance exists.
-            if key in storage.all():
-                # If instance exists, delete it.
-                del storage.all()[key]
-                # Save the changes.
-                storage.save()
-            else:
-                # If instance does not exist, print error message.
+            key = args[0] + "." + args[1]  # Create key as <class name>.<id>
+            if key not in storage.all():  # Check if instance doesn't exist
                 print("** no instance found **")
+            else:
+                storage.all().pop(key)  # Delete the instance
+                storage.save()  # Save changes to the JSON file
 
     def do_all(self, arg):
-        """Prints all string representation of all instances"""
-        if arg not in classes and arg != "":
-            # If class name doesn't exist, print an error.
+        """Prints all string representation of all instances."""
+        args = arg.split()  # Split the arguments
+        # Check if class doesn't exist
+        if len(args) > 0 and args[0] != "BaseModel":
             print("** class doesn't exist **")
         else:
-            # Print all instances of the class.
-            print([str(v) for k, v in storage.all().items()])
+            # Print all instances based or not on the class name
+            print([str(v) for k, v in storage.all().items() if "BaseModel"
+                   in k])
 
     def do_update(self, arg):
-        """Updates an instance."""
-
-        # Split args by spaces into a list
-        args = shlex.split(arg)
-
-        # Check for missing arguments
-        if len(args) == 0:
+        """Updates an instance based on the class name and id."""
+        args = arg.split()  # Split the arguments
+        if len(args) == 0:  # Check if class name is missing
             print("** class name missing **")
-            return
-        # Check if the class name does not exist.
-        elif args[0] not in self.classes:
+        elif args[0] != "BaseModel":  # Check if class doesn't exist
             print("** class doesn't exist **")
-            return
-        # Check if id is missing.
-        elif len(args) == 1:
+        elif len(args) == 1:  # Check if id is missing
             print("** instance id missing **")
-            return
-
-        # Create the key with class name and id.
-        key = args[0] + "." + args[1]
-
-        # Check if instance exists.
-        if key not in storage.all():
-            print("** no instance found **")
-            return
-
-        # Check if attribute name is provided.
-        elif len(args) == 2:
-            print("** attribute name missing **")
-            return
-
-        # Check if value for attribute name is missing.
-        elif len(args) == 3:
-            print("** value missing **")
-            return
-
         else:
-            # Get the instance from storage.
-            instance = storage.all()[key]
-            # Update the attribute with the provided value.
-            obj = models.storage.all()[key]
-            try:
-                attr_type = type(getattr(instance, args[2]))
-            except AttributeError:
-                pass
-            setattr(instance, args[2], args[3])
-            instance.save()
+            key = args[0] + "." + args[1]  # Create key as <class name>.<id>
+            if key not in storage.all():  # Check if instance doesn't exist
+                print("** no instance found **")
+            elif len(args) == 2:  # Check if attribute name is missing
+                print("** attribute name missing **")
+            # Check if value for the attribute name doesn't exist
+            elif len(args) == 3:
+                print("** value missing **")
+            else:
+                # Set attribute value
+                setattr(storage.all()[key], args[2], args[3])
+                storage.all()[key].save()  # Save changes to the JSON file
 
 
-# Run command loop if file is run directly.
 if __name__ == '__main__':
-    """Run only if called directly."""
-    HBNBCommand().cmdloop()
+    """Only run the following code when this file is not imported."""
+    HBNBCommand().cmdloop()  # Start the cmd loop
