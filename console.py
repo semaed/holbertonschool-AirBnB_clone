@@ -8,6 +8,11 @@ This module starts the command interpreter using cmd module.
 import cmd
 from models.base_model import BaseModel  # Import the BaseModel class
 from models.user import User  # Import the User class
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 from models import storage  # Import the storage object
 
 
@@ -21,7 +26,8 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     # Create a dictionary to map class names to classes
-    classes = {"BaseModel": BaseModel, "User": User}
+    classes = {"BaseModel": BaseModel, "User": User, "State": State, "City": City,
+               "Amenity": Amenity, "Place": Place, "Review": Review}
 
     # Below are the methods that implement the functionality of the commands.
 
