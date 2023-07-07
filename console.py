@@ -7,8 +7,8 @@ This module starts the command interpreter using cmd module.
 # for a command-line interpreter
 import cmd
 from models.base_model import BaseModel  # Import the BaseModel class
-from models import storage  # Import the storage object
 from models.user import User  # Import the User class
+from models import storage  # Import the storage object
 
 
 class HBNBCommand(cmd.Cmd):
@@ -67,7 +67,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()  # Split the arguments
         if len(args) == 0:  # Check if class name is missing
             print("** class name missing **")
-        elif args[0] != "BaseModel":  # Check if class doesn't exist
+        elif args[0] not in self.classes:  # Check if class doesn't exist
             print("** class doesn't exist **")
         elif len(args) == 1:  # Check if id is missing
             print("** instance id missing **")
@@ -83,7 +83,7 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all instances."""
         args = arg.split()  # Split the arguments
         # Check if class doesn't exist
-        if len(args) > 0 and args[0] != "BaseModel":
+        if len(args) > 0 and args[0] not in self.classes:
             print("** class doesn't exist **")
         else:
             # Print all instances based or not on the class name
@@ -95,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()  # Split the arguments
         if len(args) == 0:  # Check if class name is missing
             print("** class name missing **")
-        elif args[0] != "BaseModel":  # Check if class doesn't exist
+        elif args[0] not in self.classes:  # Check if class doesn't exist
             print("** class doesn't exist **")
         elif len(args) == 1:  # Check if id is missing
             print("** instance id missing **")
