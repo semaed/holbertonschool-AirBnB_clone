@@ -6,6 +6,12 @@ import json  # We need json to convert dictionary to JSON string and vice versa
 import os    # import os module used for file path operations
 from models.base_model import BaseModel  # We need to use the BaseModel class
 from models.user import User  # Import the User class
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class FileStorage:
@@ -52,3 +58,13 @@ class FileStorage:
                     self.__objects[k] = BaseModel(**v)
                 elif v['__class__'] == 'User':
                     self.__objects[k] = User(**v)
+                elif v['__class__'] == 'State':
+                    self.__objects[k] = State(**v)
+                elif v['__class__'] == 'City':
+                    self.__objects[k] = City(**v)
+                elif v['__class__'] == 'Amenity':
+                    self.__objects[k] = Amenity(**v)
+                elif v['__class__'] == 'Place':
+                    self.__objects[k] = Place(**v)
+                elif v['__class__'] == 'Review':
+                    self.__objects[k] = Review(**v)
