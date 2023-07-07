@@ -44,23 +44,27 @@ class FileStorage:
         """
         Deserialize the JSON file to __objects
         """
-        try:
-            with open(self.__file_path, "r") as f:
-                objects = json.load(f)
-            for key, v in objects.items():
+        # Check if file exists
+        if os.path.exists(self.__file_path):
+            # Open file in read mode
+            with open(self.__file_path, 'r') as f:
+                # Load JSON file to dictionary
+                obj_dict = json.load(f)
+            # Import BaseModel here to avoid circular import
+            from models.base_model import BaseModel
+            # Convert dict to objects and add them to __objects
+            for k, v in obj_dict.items():
                 if v['__class__'] == 'BaseModel':
-                    self.__objects[key] = BaseModel(**v)
+                    self.__objects[k] = BaseModel(**v)
                 elif v['__class__'] == 'User':
-                    self.__objects[key] = User(**v)
+                    self.__objects[k] = User(**v)
                 elif v['__class__'] == 'State':
-                    self.__objects[key] = State(**v)
+                    self.__objects[k] = State(**v)
                 elif v['__class__'] == 'City':
-                    self.__objects[key] = City(**v)
+                    self.__objects[k] = City(**v)
                 elif v['__class__'] == 'Amenity':
-                    self.__objects[key] = Amenity(**v)
+                    self.__objects[k] = Amenity(**v)
                 elif v['__class__'] == 'Place':
-                    self.__objects[key] = Place(**v)
+                    self.__objects[k] = Place(**v)
                 elif v['__class__'] == 'Review':
-                    self.__objects[key] = Review(**v)
-        except FileNotFoundError:
-            pass
+                    self.__objects[k] = Review(**v)
