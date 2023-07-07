@@ -26,8 +26,9 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     # Create a dictionary to map class names to classes
-    classes = {"BaseModel": BaseModel, "User": User, "State": State, "City": City,
-               "Amenity": Amenity, "Place": Place, "Review": Review}
+    classes = {"BaseModel": BaseModel, "User": User, "State": State,
+               "City": City, "Amenity": Amenity, "Place": Place,
+               "Review": Review}
 
     # Below are the methods that implement the functionality of the commands.
 
