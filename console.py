@@ -98,32 +98,27 @@ class HBNBCommand(cmd.Cmd):
             print([str(v) for k, v in storage.all().items() if args[0] in k])
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and if by
-        adding or updating attribute (save the change into the JSON file)\n"""
-        if not arg:
+        """Updates an instance based on the class name and id."""
+        args = arg.split()  # Split the arguments
+        if len(args) == 0:  # Check if class name is missing
             print("** class name missing **")
-            return
-
-        li_arg = shlex.split(arg)
-        if len(li_arg) < 2:
+        elif args[0] not in self.classes:  # Check if class doesn't exist
+            print("** class doesn't exist **")
+        elif len(args) == 1:  # Check if id is missing
             print("** instance id missing **")
-            return
-
-        try:
-            model = storage.all()[f"{li_arg[0]}.{li_arg[1]}"]
-            if len(li_arg) < 3:
+        else:
+            key = args[0] + "." + args[1]  # Create key as <class name>.<id>
+            if key not in storage.all():  # Check if instance doesn't exist
+                print("** no instance found **")
+            elif len(args) == 2:  # Check if attribute name is missing
                 print("** attribute name missing **")
-            elif len(li_arg) < 4:
+            # Check if value for the attribute name doesn't exist
+            elif len(args) == 3:
                 print("** value missing **")
             else:
-                attr_name = li_arg[2]
-                attr_value = li_arg[3]
-                if attr_value.startswith('"') and attr_value.endswith('"'):
-                    attr_value = attr_value[1:-1]
-                setattr(model, attr_name, attr_value)
-                model.save()
-        except KeyError:
-            print("** no instance found **")
+                # Set attribute value
+                setattr(storage.all()[key], args[2], args[3])
+                storage.all()[key].save()  # Save changes to the JSON file
 
     def emptyline(self):
         """Do nothing when hit enters\n"""
