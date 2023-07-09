@@ -8,12 +8,13 @@ This module starts the command interpreter using cmd module.
 import cmd
 from models.base_model import BaseModel  # Import the BaseModel class
 from models.user import User  # Import the User class
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
+from models.state import State  # Import the State class
+from models.city import City  # Import the City class
+from models.amenity import Amenity  # Import the Amenity class
+from models.place import Place  # Import the Place class
+from models.review import Review  # Import the Review class
 from models import storage  # Import the storage object
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
@@ -97,27 +98,36 @@ class HBNBCommand(cmd.Cmd):
             print([str(v) for k, v in storage.all().items() if args[0] in k])
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id."""
-        args = arg.split()  # Split the arguments
-        if len(args) == 0:  # Check if class name is missing
+        """Updates an instance based on the class name and if by
+        adding or updating attribute (save the change into the JSON file)\n"""
+        if not arg:
             print("** class name missing **")
-        elif args[0] not in self.classes:  # Check if class doesn't exist
-            print("** class doesn't exist **")
-        elif len(args) == 1:  # Check if id is missing
+            return
+
+        li_arg = shlex.split(arg)
+        if len(li_arg) < 2:
             print("** instance id missing **")
-        else:
-            key = args[0] + "." + args[1]  # Create key as <class name>.<id>
-            if key not in storage.all():  # Check if instance doesn't exist
-                print("** no instance found **")
-            elif len(args) == 2:  # Check if attribute name is missing
+            return
+
+        try:
+            model = storage.all()[f"{li_arg[0]}.{li_arg[1]}"]
+            if len(li_arg) < 3:
                 print("** attribute name missing **")
-            # Check if value for the attribute name doesn't exist
-            elif len(args) == 3:
+            elif len(li_arg) < 4:
                 print("** value missing **")
             else:
-                # Set attribute value
-                setattr(storage.all()[key], args[2], args[3])
-                storage.all()[key].save()  # Save changes to the JSON file
+                attr_name = li_arg[2]
+                attr_value = li_arg[3]
+                if attr_value.startswith('"') and attr_value.endswith('"'):
+                    attr_value = attr_value[1:-1]
+                setattr(model, attr_name, attr_value)
+                model.save()
+        except KeyError:
+            print("** no instance found **")
+
+    def emptyline(self):
+        """Do nothing when hit enters\n"""
+        pass
 
 
 if __name__ == '__main__':
