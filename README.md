@@ -141,7 +141,8 @@ The application begins in console.py, which calls an instance of the FileStorage
 (hbnb) help
 
 Documented commands (type help <topic>):
----------------------------------------
+
+========================================
 
 EOF  help  quit
 
@@ -159,6 +160,7 @@ $
 (hbnb)
 
 Documented commands (type help <topic>):
+
 ========================================
 EOF  help  quit
 (hbnb) 
@@ -170,6 +172,7 @@ $ cat test_help | ./console.py
 (hbnb)
 
 Documented commands (type help <topic>):
+
 ========================================
 EOF  help  quit
 (hbnb) 
