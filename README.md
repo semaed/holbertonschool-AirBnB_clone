@@ -84,7 +84,7 @@ The application begins in console.py, which calls an instance of the FileStorage
   </tr>
   <tr>
     <td><a href="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/models/__init__.py">__init__.py</a></td>
-    <td>Initialises a new instance of FileStorage. This is the setup file for the models package. It contains import statements for all classes in the package, creating an instance of the FileStorage class and immediately calling the reload() method on it.</td>
+    <td>Initialises a new instance of <th>'FileStorage'</th>. This is the setup file for the <th>'models'</th> package. It contains import statements for all classes in the package, creating an instance of the <th>'FileStorage'</th> class and immediately calling the <th>'reload()'</th> method on it.</td>
   </tr>
   <tr>
     <td><a href="https://github.com/jGohan-cpu/holbertonschool-simple_shell/blob/master/prompt.c">prompt.c</a></td>
