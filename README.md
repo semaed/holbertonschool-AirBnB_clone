@@ -84,36 +84,41 @@ The application begins in console.py, which calls an instance of the FileStorage
   </tr>
   <tr>
     <td><a href="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/models/__init__.py">__init__.py</a></td>
-    <td>Initialises a new instance of <th>'FileStorage'</th>. This is the setup file for the <th>'models'</th> package. It contains import statements for all classes in the package, creating an instance of the <th>'FileStorage'</th> class and immediately calling the <th>'reload()'</th> method on it.</td>
+    <td>Initialises a new instance of FileStorage. This is the setup file for the models package. It contains import statements for all classes in the package, creating an instance of the FileStorage class and immediately calling the reload() method on it.</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jGohan-cpu/holbertonschool-simple_shell/blob/master/prompt.c">prompt.c</a></td>
-    <td>Function which prints the shell prompt symbol ($)</td>
+    <td><a href="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/models/base_model.py">base_model.py</a></td>
+    <td>Contains the BaseModel class, with common methods for saving, updating, and deleting records. It defines the attributes that are common to all other classes, and methods for managing the serialization and deserialization of instances. ($)</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jGohan-cpu/holbertonschool-simple_shell/blob/master/read_line.c">read_line.c</a></td>
-    <td>Function that read a line of input from the user</td>
+    <td><a href="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/models/engine/file_storage.py">file_storage.py</a></td>
+    <td>Contains the FileStorage class, which handles serialization and deserialization of instances to JSON format, writing and reading from a JSON file. It is also responsible for managing the dictionary objects, where all instances are stored, and for saving and loading instances to and from the JSON file.</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jGohan-cpu/holbertonschool-simple_shell/blob/master/tokens.c">tokens.c</a></td>
-    <td>Takes user input and splits it into and array of arguments</td>
+    <td><a href="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/models/user.py">user.py</a></td>
+    <td>A user model that inherits from BaseModel. This class represents a user of the application. Attributes include email, password, first_name, and last_name.</td>
   </tr>
   </tr>
   <tr>
-    <td><a href="https://github.com/jGohan-cpu/holbertonschool-simple_shell/blob/master/env.c">env.c</a></td>
-    <td>Handles the environmetal varibles</td>
+    <td><a href="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/models/state.py">state.py</a></td>
+    <td>A state model that inherits from BaseModel. This class represents a state. It includes an attribute name for the name of the state.</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jGohan-cpu/holbertonschool-simple_shell/blob/master/shell.h">shell.h</a></td>
-    <td>Header file with prototypes and header files required for the program</td>
+    <td><a href="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/models/city.py">city.py</a></td>
+    <td>A city model that inherits from BaseModel. This class represents a city. Attributes include state_id and name. state_id is a string that represents the id of the State instance the City is linked to. name is the name of the city.</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jGohan-cpu/holbertonschool-simple_shell/blob/master/man_1_simple_shell">man_1_simple_shell</a></td>
-    <td>Simple man page of our shell</td>
+    <td><a href="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/models/amenity.py">amenity.py</a></td>
+    <td>An amenity model that inherits from BaseModel. This class represents an amenity. It includes an attribute name for the name of the amenity.</td>
   </tr>
   <tr>
-    <td><a href="https://github.com/jGohan-cpu/holbertonschool-simple_shell/blob/master/AUTHORS">Authors</a></td>
-    <td>Names of the authors of the project</td>
+    <td><a href="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/models/place.py">place.py</a></td>
+    <td>A place model that inherits from BaseModel. This class represents a place. Attributes include city_id, user_id, name, description, number_rooms, number_bathrooms, max_guest, price_by_night, latitude, longitude, and amenity_ids.</td>
+  </tr>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/models/review.py">review.py</a></td>
+    <td>A review model that inherits from BaseModel. This class represents a review. Attributes include place_id, user_id, and text.</td>
   </tr>
 </table>
 
