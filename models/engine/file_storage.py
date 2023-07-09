@@ -4,7 +4,6 @@ deserializes instances to and from a JSON file."""
 
 import json  # We need json to convert dictionary to JSON string and vice versa
 import os    # import os module used for file path operations
-from models.base_model import BaseModel  # We need to use the BaseModel class
 from models.user import User  # Import the User class
 from models.user import User
 from models.state import State
