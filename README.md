@@ -7,7 +7,8 @@
 1. [Introduction](#introduction)
 2. [Synopsis](#synopsis)
 3. [Project](#Project)
-  - [General Requirements](#general-requirements)
+  - [Python Scripts Requirements](#Python-Scripts-Requirements)
+  - [Python Unit Tests Requirements](#Python-Unit-Tests-Requirements)
   - [Functions and system calls used](#functions-and-system-calls-used)
     - [Description of each file](#description-of-each-file)
   - [Environment](#environment)
@@ -15,9 +16,6 @@
   - [Testing](#testing)
     - [Interactive](#interactive-mode)
     - [Non-Interactive](#non-interactive-mode)
-    - [Sample usage](#sample-usage)
-    - [Stop and return to your original shell](#stop-and-return-to-your-original-shell)
-  - [Project Tasks](#project-tasks)
 5. [Authors](#authors)
 
 ## **📜Introduction**
