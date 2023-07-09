@@ -24,7 +24,7 @@
 * In this project we coded from scratch an AirBnb clone.
 * This is the first phase of the Airbnb Clone: the console. This repository holds a command interpreter and classes (i.e. BaseModel class and several other classes that inherit from it: Amenity, City, State, Place, Review), and a command interpreter. The command interpreter, like a shell, can be activated, take in user input, and perform certain tasks to manipulate the object instances.
 
-  [Back to Top](#AirBnB-Clone)
+[Back to Top](#AirBnB-Clone)
     
 ## **💡Synopsis**
 The application begins in console.py, which calls an instance of the FileStorage class in __init__.py. This class manages all files within the storage system. For file operations, the FileStorage class calls methods from the base_model.py and file_storage.py scripts, each responsible for different aspects of the system.
@@ -124,3 +124,62 @@ The application begins in console.py, which calls an instance of the FileStorage
 
 </body>
 </html>
+
+### **🌎Environment**
+  - Language: Python
+  - OS: Ubuntu 20.04
+  - Compiler: python3 (version 3.8.5)
+  - Style guideines: pycodestyle (version 2.7.*)
+
+### **💻Testing**
+  
+   -You can test our custom version of the AirBnb Clone in the interactive and non-interactive mode.
+    
+#### **💻Interactive mode**
+
+  - The console should work like this in interactive mode:
+
+    $ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+$
+  
+    
+#### **💻Non-Interactive mode**
+
+  -In the non-interactive mode should work like this:
+
+  $ echo "help" | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+      
+[Back to Top](#AirBnB-Clone)
+
+## 🤝Authors
+![Braian Perez](https://github.com/BraianPerez97)
+![Eduardo Figueroa](https://github.com/semaed)
+
+[Back to Top](#AirBnB-Clone)
