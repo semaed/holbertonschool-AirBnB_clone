@@ -14,7 +14,6 @@ from models.amenity import Amenity  # Import the Amenity class
 from models.place import Place  # Import the Place class
 from models.review import Review  # Import the Review class
 from models import storage  # Import the storage object
-import shlex
 
 
 class HBNBCommand(cmd.Cmd):
