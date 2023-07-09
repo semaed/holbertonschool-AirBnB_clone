@@ -35,7 +35,7 @@ class FileStorage:
         # Convert objects to dict representation
         obj_dict = {k: v.to_dict() for k, v in self.__objects.items()}
         # Open file in write mode
-        with open(self.__file_path, 'w') as f:
+        with open(self.__file_path, 'w', encoding='utf-8') as f:
             # Write dictionary to file as JSON
             json.dump(obj_dict, f)
 
@@ -46,7 +46,7 @@ class FileStorage:
         # Check if file exists
         if os.path.exists(self.__file_path):
             # Open file in read mode
-            with open(self.__file_path, 'r') as f:
+            with open(self.__file_path, 'r', encoding='utf-8') as f:
                 # Load JSON file to dictionary
                 obj_dict = json.load(f)
             # Import BaseModel here to avoid circular import
