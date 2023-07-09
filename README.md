@@ -24,12 +24,12 @@
 * In this project we coded from scratch an AirBnb clone.
 * This is the first phase of the Airbnb Clone: the console. This repository holds a command interpreter and classes (i.e. BaseModel class and several other classes that inherit from it: Amenity, City, State, Place, Review), and a command interpreter. The command interpreter, like a shell, can be activated, take in user input, and perform certain tasks to manipulate the object instances.
 
-  [Back to Top](#project-name)
+  [Back to Top](#AirBnB Clone)
     
 ## **💡Synopsis**
 The application begins in console.py, which calls an instance of the FileStorage class in __init__.py. This class manages all files within the storage system. For file operations, the FileStorage class calls methods from the base_model.py and file_storage.py scripts, each responsible for different aspects of the system.
 
-[Back to Top](#project-name)
+[Back to Top](#AirBnB Clone)
   
 ## **💽Project**
 
