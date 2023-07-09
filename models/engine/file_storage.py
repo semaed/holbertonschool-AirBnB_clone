@@ -5,12 +5,11 @@ deserializes instances to and from a JSON file."""
 import json  # We need json to convert dictionary to JSON string and vice versa
 import os    # import os module used for file path operations
 from models.user import User  # Import the User class
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
+from models.state import State  # Import the State class
+from models.city import City  # Import the City class
+from models.amenity import Amenity  # Import the Amenity class
+from models.place import Place  # Import the Place class
+from models.review import Review  # Import the Review class
 
 
 class FileStorage:
@@ -54,16 +53,23 @@ class FileStorage:
             # Convert dict to objects and add them to __objects
             for k, v in obj_dict.items():
                 if v['__class__'] == 'BaseModel':
+                    # If class is 'BaseModel', create a BaseModel object
                     self.__objects[k] = BaseModel(**v)
                 elif v['__class__'] == 'User':
+                    # If class is 'User', create a User object
                     self.__objects[k] = User(**v)
                 elif v['__class__'] == 'State':
+                    # If class is 'State', create a State object
                     self.__objects[k] = State(**v)
                 elif v['__class__'] == 'City':
+                    # If class is 'City', create a City object
                     self.__objects[k] = City(**v)
                 elif v['__class__'] == 'Amenity':
+                    # If class is 'Amenity', create an Amenity object
                     self.__objects[k] = Amenity(**v)
                 elif v['__class__'] == 'Place':
+                    # If class is 'Place', create a Place object
                     self.__objects[k] = Place(**v)
                 elif v['__class__'] == 'Review':
+                    # If class is 'Review', create a Review object
                     self.__objects[k] = Review(**v)
