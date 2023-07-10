@@ -88,11 +88,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """Prints all string representation of all instances."""
-        args = arg.split()  # Split the arguments
         # Check if class doesn't exist
         if len(args) > 0 and args[0] not in self.classes:
             print("** class doesn't exist **")
         else:
+            args = arg.split()  # Split the arguments
+
             # Print all instances based or not on the class name
             print([str(v) for k, v in storage.all().items() if args[0] in k])
 
