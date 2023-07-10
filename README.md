@@ -136,7 +136,7 @@ The application begins in console.py, which calls an instance of the FileStorage
 #### **💻Interactive mode**
 
   - The console should work like this in interactive mode:
-
+```
     $ ./console.py
 (hbnb) help
 
@@ -152,12 +152,12 @@ EOF  help  quit
 
 (hbnb) quit
 $
-  
+```
     
 #### **💻Non-Interactive mode**
 
   -In the non-interactive mode should work like this:
-
+```
   $ echo "help" | ./console.py
 (hbnb)
 
@@ -189,7 +189,7 @@ EOF  help  quit
 (hbnb) 
 
 $
-      
+```      
 [Back to Top](#AirBnB-Clone)
 
 ## 🤝Authors
