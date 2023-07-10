@@ -8,6 +8,7 @@ other classes.
 import uuid
 # We import the datetime module to manage dates and times
 from datetime import datetime
+import models
 
 
 class BaseModel:
@@ -41,8 +42,7 @@ class BaseModel:
 
         else:
             # Import storage and add the new object to it
-            from models import storage
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """
@@ -59,9 +59,8 @@ class BaseModel:
         """
         # Update the updated_at attribute
         self.updated_at = datetime.now()
-        from models import storage  # Import the storage object
         # Save the instance to storage
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """
