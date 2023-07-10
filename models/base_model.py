@@ -9,7 +9,6 @@ import uuid
 # We import the datetime module to manage dates and times
 from datetime import datetime
 import models
-p
 
 
 class BaseModel:
