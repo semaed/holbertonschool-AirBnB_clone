@@ -48,28 +48,12 @@ class FileStorage:
             with open(self.__file_path, 'r') as f:
                 # Load JSON file to dictionary
                 obj_dict = json.load(f)
-            # Import BaseModel here to avoid circular import
-            from models.base_model import BaseModel
             # Convert dict to objects and add them to __objects
             for k, v in obj_dict.items():
-                if v['__class__'] == 'BaseModel':
-                    # If class is 'BaseModel', create a BaseModel object
-                    self.__objects[k] = BaseModel(**v)
-                elif v['__class__'] == 'User':
-                    # If class is 'User', create a User object
-                    self.__objects[k] = User(**v)
-                elif v['__class__'] == 'State':
-                    # If class is 'State', create a State object
-                    self.__objects[k] = State(**v)
-                elif v['__class__'] == 'City':
-                    # If class is 'City', create a City object
-                    self.__objects[k] = City(**v)
-                elif v['__class__'] == 'Amenity':
-                    # If class is 'Amenity', create an Amenity object
-                    self.__objects[k] = Amenity(**v)
-                elif v['__class__'] == 'Place':
-                    # If class is 'Place', create a Place object
-                    self.__objects[k] = Place(**v)
-                elif v['__class__'] == 'Review':
-                    # If class is 'Review', create a Review object
-                    self.__objects[k] = Review(**v)
+                class_name = v['__class__']
+            try:
+                class_ = globals()[class_name]
+            except KeyError:
+                print(f"Class {class_name} doesn't exist.")
+            else:
+                self.__objects[k] = class_(**v)
