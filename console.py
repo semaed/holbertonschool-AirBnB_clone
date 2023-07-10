@@ -42,10 +42,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it, and prints the id."""
-        args = arg.split()  # Split the arguments
-        if len(args) < 1:  # Check if class name is missing
+        if not arg:  # Check if class name is missing
             print("** class name missing **")
-        elif args[0] not in self.classes:  # Check if class doesn't exist
+        args = arg.split()  # Split the arguments
+        if args[0] not in self.classes:  # Check if class doesn't exist
             print("** class doesn't exist **")
         else:
             # Create new instance # Create new instance
@@ -55,10 +55,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """Prints the string representation of an instance."""
-        args = arg.split()  # Split the arguments
-        if len(args) == 0:  # Check if class name is missing
+        if not arg:  # Check if class name is missing
             print("** class name missing **")
-        elif args[0] not in self.classes:  # Check if class doesn't exist
+        args = arg.split()  # Split the arguments
+        if args[0] not in self.classes:  # Check if class doesn't exist
             print("** class doesn't exist **")
         elif len(args) == 1:  # Check if id is missing
             print("** instance id missing **")
@@ -98,10 +98,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id."""
-        args = arg.split()  # Split the arguments
-        if len(args) == 0:  # Check if class name is missing
+        if not arg:  # Check if class name is missing
             print("** class name missing **")
-        elif args[0] not in self.classes:  # Check if class doesn't exist
+        args = arg.split()  # Split the arguments
+        if args[0] not in self.classes:  # Check if class doesn't exist
             print("** class doesn't exist **")
         elif len(args) == 1:  # Check if id is missing
             print("** instance id missing **")
