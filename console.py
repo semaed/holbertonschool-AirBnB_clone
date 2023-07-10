@@ -117,8 +117,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
             else:
                 # Set attribute value
-                setattr(storage.all()[key], args[2], args[3])
-                storage.all()[key].save()  # Save changes to the JSON file
+                obj = storage.all()[key] 
+                setattr(obj, args[2], args[3]) # Save changes to the JSON file
+                obj.save()
 
     def emptyline(self):
         """Do nothing when hit enters\n"""
