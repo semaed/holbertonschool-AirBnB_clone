@@ -1,6 +1,6 @@
 # **AirBnB Clone**
 <p align="center">
-  <img src="airbnb banner.gif" width="550" height="200">
+  <img src="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/Images/airbnb%20banner.gif" width="550" height="200">
 </p>
 
 ## **📋 Table of Contents**
