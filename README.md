@@ -1,6 +1,6 @@
 # **AirBnB Clone**
 <p align="center">
-  <img src="airbnb banner.gif" width="550" height="200">
+  <img src="https://github.com/semaed/holbertonschool-AirBnB_clone/blob/master/Images/airbnb%20banner.gif" width="550" height="200">
 </p>
 
 ## **📋 Table of Contents**
@@ -12,7 +12,6 @@
   - [Functions and system calls used](#functions-and-system-calls-used)
     - [Description of each file](#description-of-each-file)
   - [Environment](#environment)
-  - [Compilation](#compilation)
   - [Testing](#testing)
     - [Interactive](#interactive-mode)
     - [Non-Interactive](#non-interactive-mode)
@@ -136,12 +135,11 @@ The application begins in console.py, which calls an instance of the FileStorage
 #### **💻Interactive mode**
 
   - The console should work like this in interactive mode:
-
+```
     $ ./console.py
 (hbnb) help
 
 Documented commands (type help <topic>):
-
 ========================================
 
 EOF  help  quit
@@ -152,17 +150,16 @@ EOF  help  quit
 
 (hbnb) quit
 $
-  
+```
     
 #### **💻Non-Interactive mode**
 
   -In the non-interactive mode should work like this:
-
+```
   $ echo "help" | ./console.py
 (hbnb)
 
 Documented commands (type help <topic>):
-
 ========================================
 
 EOF  help  quit
@@ -189,7 +186,7 @@ EOF  help  quit
 (hbnb) 
 
 $
-      
+```      
 [Back to Top](#AirBnB-Clone)
 
 ## 🤝Authors
