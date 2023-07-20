@@ -14,5 +14,5 @@ header .logo {
     background-position: left center; 
     min-width: 100%; 
     height: 70px;
-    padding-left: 20px;
+    margin-left: 20px;
 }
