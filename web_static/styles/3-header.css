@@ -8,5 +8,11 @@ header {
 }
 
 header .logo {
+    background-image: url("../images/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center; 
+    min-width: 100%; 
+    height: 70px;
     padding-left: 20px;
 }
