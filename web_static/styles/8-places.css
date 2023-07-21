@@ -6,6 +6,7 @@
 
 .articles {
     margin-left: 4rem;
+    margin-top: 20px;
     margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -23,11 +24,6 @@
     border: 1px solid #FF5A5F;
     border-radius: 4px;
 
-}
-
-.articles {
-    margin-left: 4rem;
-    margin-top:  20px;
 }
 
 .arti-title {
@@ -117,6 +113,7 @@
 
 .articles .art-cent {
    margin-left: 15rem;
+   margin-bottom: 5rem;
 }
 
 
