@@ -4,12 +4,12 @@
 
 from models.base_model import BaseModel
 
-
+# Define a class called Place that inherits from BaseModel
 class Place(BaseModel):
     """ Place class that inherits from BaseModel """
     city_id = ""  # It will be the City.id
     user_id = ""  # It will be the User.id
-    name = ""
+    name = ""  # Define various attributes for a place
     description = ""
     number_rooms = 0
     number_bathrooms = 0
