@@ -3,6 +3,7 @@
 
 This module starts the command interpreter using cmd module.
 """
+
 # Import the cmd module which provides a framework
 # for a command-line interpreter
 import cmd
@@ -14,7 +15,6 @@ from models.amenity import Amenity  # Import the Amenity class
 from models.place import Place  # Import the Place class
 from models.review import Review  # Import the Review class
 from models import storage  # Import the storage object
-
 
 class HBNBCommand(cmd.Cmd):
     """This class is the command interpreter.
@@ -48,7 +48,7 @@ class HBNBCommand(cmd.Cmd):
         if args[0] not in self.classes:  # Check if class doesn't exist
             print("** class doesn't exist **")
         else:
-            # Create new instance # Create new instance
+            # Create new instance
             new_instance = self.classes[args[0]]()
             new_instance.save()  # Save it
             print(new_instance.id)  # Print the id
@@ -88,12 +88,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """Prints all string representation of all instances."""
+        args = arg.split()  # Split the arguments
         # Check if class doesn't exist
         if len(args) > 0 and args[0] not in self.classes:
             print("** class doesn't exist **")
         else:
-            args = arg.split()  # Split the arguments
-
             # Print all instances based or not on the class name
             print([str(v) for k, v in storage.all().items() if args[0] in k])
 
@@ -117,14 +116,13 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
             else:
                 # Set attribute value
-                obj = storage.all()[key] 
-                setattr(obj, args[2], args[3]) # Save changes to the JSON file
+                obj = storage.all()[key]
+                setattr(obj, args[2], args[3])  # Save changes to the JSON file
                 obj.save()
 
     def emptyline(self):
         """Do nothing when hit enters\n"""
         pass
-
 
 if __name__ == '__main__':
     """Only run the following code when this file is not imported."""
