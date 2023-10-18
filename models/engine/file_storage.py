@@ -11,7 +11,7 @@ from models.amenity import Amenity  # Import the Amenity class
 from models.place import Place  # Import the Place class
 from models.review import Review  # Import the Review class
 
-
+# Define a class called FileStorage for managing object storage
 class FileStorage:
     """A class to manage the storage of all our instances."""
 
