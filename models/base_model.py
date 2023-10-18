@@ -10,7 +10,7 @@ import uuid
 from datetime import datetime
 import models
 
-
+# Define a class called BaseModel that serves as a base class for other classes
 class BaseModel:
     """
     A base class that defines common attributes/methods for other classes.
@@ -20,7 +20,7 @@ class BaseModel:
         """
         This method is called when a new instance of the class is created.
         If kwargs is not empty, assigns attributes based on kwargs.
-        Otherwise, assigns unique id and the current date/time.
+        Otherwise, assigns a unique ID and the current date/time.
         """
         # Generate a unique ID for the instance
         self.id = str(uuid.uuid4())
@@ -29,7 +29,7 @@ class BaseModel:
         # updated_at is the same as created_at when the instance is created
         self.updated_at = self.created_at
 
-        if kwargs:  # Instance is created from dictionary
+        if kwargs:  # Instance is created from a dictionary
             # Iterate through dictionary items
             for key, value in kwargs.items():
                 # Convert string to datetime for these keys
@@ -37,7 +37,7 @@ class BaseModel:
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 # Ignore the __class__ key
                 if key != '__class__':
-                    # Set attribute on instance with key-value pair.
+                    # Set attribute on the instance with the key-value pair.
                     setattr(self, key, value)
 
         else:
